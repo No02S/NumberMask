@@ -9,7 +9,7 @@
 
 ```JS
 numberMask({
-    form: //form with input
+    form: //form with input,
     input: //input to mask
 })
 ```
