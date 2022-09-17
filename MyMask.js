@@ -1,22 +1,25 @@
 export const numberMask = ({form,input}) =>{
     let phoneMask = {
-        mask: "+7 (___) ___ ____",
+        mask: "+7 (___) ___-__-__",
         lastNumber:''
     };
+
     form.querySelector(input).addEventListener('focus',(e)=>{
         e.target.value = phoneMask.mask;
     });
+    form.querySelector(input).addEventListener('click',(e)=>{
+        e.target.setSelectionRange(phoneMask.mask.indexOf('_'),phoneMask.mask.indexOf('_'));
+    });
     form.querySelector(input).addEventListener('keydown',(e)=>{
-        
+
         if (e.key == "Backspace" && phoneMask.lastNumber != "(") {
             e.preventDefault();
             phoneMask.mask = phoneMask.mask.split('');
             let indexLastNumber = phoneMask.mask.lastIndexOf(phoneMask.lastNumber);
 
             for( let i = indexLastNumber-1;i>0;i--) {
-                console.log('1');
                 phoneMask.lastNumber = phoneMask.mask[i];
-                if(phoneMask.lastNumber == ' ' ||  phoneMask.lastNumber == ')') {
+                if(phoneMask.lastNumber == '-' || phoneMask.lastNumber == ' ' ||  phoneMask.lastNumber == ')') {
                     continue;
                 } else {
                     break;
@@ -31,10 +34,11 @@ export const numberMask = ({form,input}) =>{
         }
         setTimeout(()=>{
             e.target.value = phoneMask.mask;
+            e.target.setSelectionRange(phoneMask.mask.indexOf('_'),phoneMask.mask.indexOf('_'));
         });
     });
     form.addEventListener('submit',()=>{
-        phoneMask.mask = "+7 (___) ___ ____";
+        phoneMask.mask = "+7 (___) ___-__-__";
     });
 };
 
