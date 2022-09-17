@@ -33,5 +33,8 @@ export const numberMask = ({form,input}) =>{
             e.target.value = phoneMask.mask;
         });
     });
+    form.addEventListener('submit',()=>{
+        phoneMask.mask = "+7 (___) ___ ____";
+    });
 };
 
