@@ -1,16 +1,19 @@
-export const numberMask = ({form,input}) =>{
+export const numberMask = ({form,input,always=false}) =>{
     let phoneMask = {
         mask: "+7 (___) ___-__-__",
         lastNumber:''
     };
+    let phoneInput = form.querySelector(input);
 
-    form.querySelector(input).addEventListener('focus',(e)=>{
+    always ? phoneInput.value = phoneMask.mask : phoneInput.value = '';
+
+    phoneInput.addEventListener('focus',(e)=>{
         e.target.value = phoneMask.mask;
     });
-    form.querySelector(input).addEventListener('click',(e)=>{
+    phoneInput.addEventListener('click',(e)=>{
         e.target.setSelectionRange(phoneMask.mask.indexOf('_'),phoneMask.mask.indexOf('_'));
     });
-    form.querySelector(input).addEventListener('keydown',(e)=>{
+    phoneInput.addEventListener('keydown',(e)=>{
 
         if (e.key == "Backspace" && phoneMask.lastNumber != "(") {
             e.preventDefault();
@@ -41,4 +44,5 @@ export const numberMask = ({form,input}) =>{
         phoneMask.mask = "+7 (___) ___-__-__";
     });
 };
+
 
